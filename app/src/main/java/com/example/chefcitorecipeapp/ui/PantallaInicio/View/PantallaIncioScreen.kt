@@ -2,8 +2,10 @@ package com.example.chefcitorecipeapp.ui.PantallaInicio.View
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -32,10 +35,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -52,7 +58,21 @@ fun InicioScreen(navController: NavController){
 
     var user by remember { mutableStateOf(TextFieldValue("")) }
     var password by remember { mutableStateOf(TextFieldValue("")) }
+    val newuser = buildAnnotatedString {
+        val text = stringResource(id = R.string.signin)
+        append(text)
+        val start = 0
+        val end = text.length
 
+        addStyle(
+            SpanStyle(
+                color = Color.Black,
+                textDecoration = TextDecoration.Underline,
+            ),
+            start,
+            end
+        )
+    }
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -164,6 +184,31 @@ fun InicioScreen(navController: NavController){
                         color = Color.White
                     )
                 }
+                Spacer(modifier = Modifier.height(16.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+
+                ){
+                    Text(
+                        text = stringResource(id = R.string.questionusaurio),
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier
+                            .padding(vertical = 0.dp)
+                            .padding(horizontal = 4.dp),
+                        textAlign = TextAlign.Center,
+                        color = Color.Black
+                    )
+                    ClickableText(
+                        text = newuser,
+                        onClick ={
+                        },
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+
             }
         }
     }
