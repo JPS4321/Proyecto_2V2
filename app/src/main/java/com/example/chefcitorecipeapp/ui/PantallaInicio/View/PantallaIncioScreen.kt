@@ -42,13 +42,18 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.chefcitorecipeapp.R
 import com.example.chefcitorecipeapp.navigation.Screen
+import com.example.chefcitorecipeapp.ui.PantallaInicio.Repository.PantallaInicioViewModel
 import com.example.chefcitorecipeapp.ui.theme.ChefcitoRecipeAppTheme
 import com.example.chefcitorecipeapp.ui.theme.ColorMain
 import com.example.chefcitorecipeapp.ui.theme.Fondo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InicioScreen(navController: NavController){
+fun InicioScreen(
+    navController: NavController,
+    viewModel: PantallaInicioViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+
+){
 
     var user by remember { mutableStateOf(TextFieldValue("")) }
     var password by remember { mutableStateOf(TextFieldValue("")) }
@@ -145,6 +150,8 @@ fun InicioScreen(navController: NavController){
 
                 Button(
                     onClick = {
+
+
                         navController.navigate("Main"){
                             popUpTo("Authentication") {
                                 inclusive = false
